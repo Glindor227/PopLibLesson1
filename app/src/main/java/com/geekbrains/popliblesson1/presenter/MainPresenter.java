@@ -3,12 +3,15 @@ package com.geekbrains.popliblesson1.presenter;
 import com.geekbrains.popliblesson1.model.MainModel;
 import com.geekbrains.popliblesson1.view.MainView;
 
-public class MainPresenter{
-    private MainModel model;
-    private MainView view;
+import moxy.MvpPresenter;
 
-    public MainPresenter(MainView view) {
-        this.view = view;
+public class MainPresenter extends MvpPresenter<MainView> {
+    private MainModel model;
+
+
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         model = new MainModel();
     }
 
@@ -20,6 +23,6 @@ public class MainPresenter{
         String resultText = myLogic(model.getText(),newText);
 
         model.setText(resultText);
-        view.setResultText(resultText);
+        getViewState().setResultText(resultText);
     }
 }
