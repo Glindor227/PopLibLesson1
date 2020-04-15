@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PopLibLesson1</string>
+    <string name="btn_text">Добавить строку</string>
+</resources>
