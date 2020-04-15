@@ -1,4 +1,4 @@
-package com.geekbrains.popliblesson1;
+package com.geekbrains.popliblesson1.view;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,15 +7,20 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import com.geekbrains.popliblesson1.R;
+import com.geekbrains.popliblesson1.presenter.MainPresenter;
+
+public class MainActivity extends AppCompatActivity implements MainView{
 
     Button button;
     TextView resultText;
     EditText oneWord;
+    MainPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        presenter = new MainPresenter(this);
         initUserView();
     }
 
@@ -23,9 +28,12 @@ public class MainActivity extends AppCompatActivity {
         oneWord = findViewById(R.id.tv_one_word);
         resultText = findViewById(R.id.tv_result_text);
         button = findViewById(R.id.textOperation);
-        button.setOnClickListener(view -> {
-            String oldText = resultText.getText().toString();
-            resultText.setText(oldText.concat(oneWord.getText().toString()));
-        });
+
+        button.setOnClickListener(view -> presenter.addTest(oneWord.getText().toString()));
+    }
+
+    @Override
+    public void setResultText(String string) {
+        resultText.setText(string);
     }
 }
